@@ -83,7 +83,7 @@ const SearchBar = () => {
         text &&
           <List className={classes.list} hidden={open}>
             {
-              products.filter(product => product.title.longTitle.toLowerCase().includes(text.toLowerCase())).map(product => (
+              products.filter(product => product.title.longTitle.toLowerCase().includes(text.toLowerCase()))?.map(product => (
                 <ListItem><Link onClick={() => setOpen(true)} style={{color: '#000', textDecoration: 'none'}} to={`/product/${product.id}`}>{product.title.longTitle}</Link></ListItem>
               ))
             }

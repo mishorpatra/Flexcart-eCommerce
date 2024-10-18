@@ -31,7 +31,7 @@ const NavBar = () => {
     return (
         <Box className = {classes.component}>
         {
-            navData.map(data => (
+            navData?.map(data => (
                 <Box className={classes.container}>
                     <img src = {data.url} className={classes.image}/>
                     <Typography className={classes.text}>{data.text}</Typography>

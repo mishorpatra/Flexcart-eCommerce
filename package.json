@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "client install": "cd client && npm install",
-    "client build": "cd client && npm run build",
+    "start": "node app.js",
+    "client": "cd client && npm start",
+    "client-install": "cd client && npm install",
+    "client-build": "cd client && npm run build",
     "heroku postbuild": "npm run client install && npm run client build"
   },
   "author": "",
@@ -22,6 +23,7 @@
     "https": "^1.0.0",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15",
-    "paytmchecksum": "^1.5.0"
+    "paytmchecksum": "^1.5.0",
+    "url": "^0.11.4"
   }
 }

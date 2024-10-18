@@ -9,26 +9,37 @@ import Connecion from './Database/db.js'
 import DefaultData from './default.js'
 import Routes from './routes/routes.js'
 
+import path from 'path'
+import { fileURLToPath } from 'url'
+
 dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 8000
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Serve the dev.iwayplus.in/ homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.use('/', Routes)
 
-const username = process.env.DB_USERNAME
-const password = process.env.DB_PASSWORD
 
-const URL = `mongodb+srv://${username}:${password}@ecommerceweb.j3v7o.mongodb.net/ECOMMERCEWEB?retryWrites=true&w=majority`
+
+const URL = process.env.MONGO_URI
 
 
 Connecion(process.env.MONGODB_URI || URL)
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-}
+
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
 
